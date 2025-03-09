@@ -8,17 +8,17 @@ def detect_sensitive_data(filepath):
             content = file.read()
 
             credit_card_pattern = r"(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|22(?:12[6-9]|1[0-9]{3}|2(?:0[0-9]{2}|1[0-9][0-9]|2[0-9][0-9]|9[0-7][0-9]|980|990))|4[0-9]{12}(?:[0-9]{3})?|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35(?:28|68|7[6-8])))"
-            ssn_pattern = r"\b(?!000|666)[0-9]{3}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}\b"
+            aadhar_card = r"\b(?!000|666)[0-9]{3}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}\b"
             email_pattern = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
 
             credit_card_matches = re.findall(credit_card_pattern, content)
-            ssn_matches = re.findall(ssn_pattern, content)
+            aadhar_card_matches = re.findall(aadhar_card, content)
             email_matches = re.findall(email_pattern, content)
 
-            if credit_card_matches or ssn_matches or email_matches:
+            if credit_card_matches or aadhar_card_matches or email_matches:
                 print(f"Sensitive data found in: {filepath}")
                 if credit_card_matches: print(f"  Credit Cards: {credit_card_matches}")
-                if ssn_matches: print(f"  SSNs: {ssn_matches}")
+                if aadhar_card_matches: print(f"  SSNs: {aadhar_card_matches}")
                 if email_matches: print(f"  Emails: {email_matches}")
 
     except UnicodeDecodeError:
